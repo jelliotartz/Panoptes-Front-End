@@ -8,6 +8,10 @@ import SearchSelector from './projects-search-selector';
 import SortSelector from './projects-sort-selector';
 import PageSelector from './projects-page-selector';
 
+import BackupOuroborosProjects from '../../lib/backup-ouroboros-projects';
+
+const BACKUPOUROBOROSPROJECTS = BackupOuroborosProjects;
+
 class ProjectFilteringInterface extends Component {
   constructor(props) {
     super(props);
@@ -75,7 +79,7 @@ class ProjectFilteringInterface extends Component {
         }
       })
       .catch((error) => {
-        this.setState({ error });
+        this.setState({ error, projects: BACKUPOUROBOROSPROJECTS, pages: 1, projectCount: BACKUPOUROBOROSPROJECTS.length });
       })
       .then(() => {
         this.setState({ loading: false });
