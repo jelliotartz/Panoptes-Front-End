@@ -409,7 +409,9 @@ EditWorkflowPage = React.createClass
             </div>}
 
           <div>
-            <a href={@workflowLink()} className="standard-button" target="from-lab" onClick={@handleViewClick}>Test this workflow</a>
+            <a href={@workflowLink()} className="standard-button disabled" target="from-lab" onClick={@handleViewClick}>Test this workflow</a>
+            <span>{' '}</span>
+            <small className="form-help warning">Temporarily Disabled</small>
           </div>
 
           <hr />

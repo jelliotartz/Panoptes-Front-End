@@ -16,6 +16,11 @@
   &:disabled
     pointer-events: none
 
+  &.disabled
+    pointer-events: none
+    cursor: default
+    background: lighten(MAIN_HIGHLIGHT, 50%)
+
   &.full
     display: block
     width: 100%
