@@ -7,6 +7,7 @@ import CropTask from './crop/';
 import TextTask from './text/';
 import DropdownTask from './dropdown/';
 import ShortcutTask from './shortcut';
+import Highlighter from './highlighter/'
 
 const tasks = {
   combo: ComboTask,
@@ -17,7 +18,8 @@ const tasks = {
   crop: CropTask,
   text: TextTask,
   dropdown: DropdownTask,
-  shortcut: ShortcutTask
+  shortcut: ShortcutTask,
+  highlighter: Highlighter
 };
 
 export default tasks;

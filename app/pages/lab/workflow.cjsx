@@ -130,7 +130,8 @@ EditWorkflowPage = React.createClass
                             when 'crop' then <i className="fa fa-crop fa-fw"></i>
                             when 'text' then <i className="fa fa-file-text-o fa-fw"></i>
                             when 'dropdown' then <i className="fa fa-list fa-fw"></i>
-                            when 'combo' then <i className="fa fa-cubes fa-fw"></i>}
+                            when 'combo' then <i className="fa fa-cubes fa-fw"></i>
+                            when 'highlighter' then <i className="fa fa-i-cursor"></i>}
                           {' '}
                           {tasks[definition.type].getTaskText definition}
                           {if key is @props.workflow.first_task
@@ -172,6 +173,13 @@ EditWorkflowPage = React.createClass
                       <i className="fa fa-binoculars fa-2x"></i>
                       <br />
                       <small><strong>Survey</strong></small>
+                    </button>
+                  </AutoSave>{' '}
+                  <AutoSave resource={@props.workflow}>
+                    <button type="submit" className="minor-button" onClick={@addNewTask.bind this, 'highlighter'} title="Highlighter: The volunteer can highlight piece of text.">
+                      <i className="fa fa-i-cursor fa-2x"></i>
+                      <br />
+                      <small><strong>Highlighter</strong></small>
                     </button>
                   </AutoSave>{' '}
                   {if @canUseTask(@props.project, "crop")
