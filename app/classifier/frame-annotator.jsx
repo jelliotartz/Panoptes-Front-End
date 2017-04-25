@@ -5,6 +5,8 @@ import seenThisSession from '../lib/seen-this-session';
 import getSubjectLocation from '../lib/get-subject-location';
 import WarningBanner from './warning-banner';
 import SVGImage from '../components/svg-image';
+import FeedbackViewer from './feedback/feedback-viewer';
+
 
 export default class FrameAnnotator extends React.Component {
   constructor(props) {
@@ -213,6 +215,8 @@ export default class FrameAnnotator extends React.Component {
                 }
               })}
 
+              <FeedbackViewer feedback={this.context.feedback} />
+
             </g>
           </svg>
 
@@ -229,6 +233,11 @@ export default class FrameAnnotator extends React.Component {
     );
   }
 }
+
+
+FrameAnnotator.contextTypes = {
+  feedback: React.PropTypes.object,
+};
 
 FrameAnnotator.propTypes = {
   annotation: React.PropTypes.shape({

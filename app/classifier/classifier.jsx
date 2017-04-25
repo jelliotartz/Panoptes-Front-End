@@ -16,6 +16,7 @@ import interventionMonitor from '../lib/intervention-monitor';
 import experimentsClient from '../lib/experiments-client';
 import TaskNav from './task-nav';
 import ExpertOptions from './expert-options';
+import FeedbackContext from './feedback/feedback-context';
 
 // For easy debugging
 window.cachedClassification = CacheClassification;
@@ -87,6 +88,12 @@ export default class Classifier extends React.Component {
     }
   }
 
+  getChildContext() {
+    return {
+      feedback: new FeedbackContext()
+    }
+  }
+
   getExpertClassification(workflow, subject) {
     const awaitExpertClassification = Promise.resolve(
       apiClient.get('/classifications/gold_standard', {
@@ -118,7 +125,7 @@ export default class Classifier extends React.Component {
         workflow_id: this.props.workflow.id,
         subject_id: subject.id
       };
-    
+
 
       apiClient.type('subject_workflow_statuses')
       .get(query)
@@ -356,8 +363,12 @@ export default class Classifier extends React.Component {
   }
 }
 
+Classifier.childContextTypes = {
+  feedback: React.PropTypes.object,
+};
+
 Classifier.contextTypes = {
-  geordi: React.PropTypes.object
+  geordi: React.PropTypes.object,
 };
 
 Classifier.propTypes = {
