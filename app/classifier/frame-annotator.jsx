@@ -215,7 +215,7 @@ export default class FrameAnnotator extends React.Component {
                 }
               })}
 
-              <FeedbackViewer feedback={this.context.feedback} />
+              <FeedbackViewer />
 
             </g>
           </svg>
@@ -233,11 +233,6 @@ export default class FrameAnnotator extends React.Component {
     );
   }
 }
-
-
-FrameAnnotator.contextTypes = {
-  feedback: React.PropTypes.object,
-};
 
 FrameAnnotator.propTypes = {
   annotation: React.PropTypes.shape({
