@@ -151,41 +151,44 @@ export default class SVGRenderer extends React.Component {
     children = children.concat(persistentHooks);
 
     return (
-      <svg
-        ref={(element) => { if (element) this.svgSubjectArea = element; }}
-        className="subject"
-        style={svgStyle}
-        viewBox={createdViewBox}
-        {...svgProps}
-      >
-        <g
-          ref={(element) => { if (element) this.transformationContainer = element; }}
-          transform={this.props.transform}
+      <div>
+        <svg
+          ref={(element) => { if (element) this.svgSubjectArea = element; }}
+          className="subject"
+          style={svgStyle}
+          viewBox={createdViewBox}
+          {...svgProps}
         >
-          <rect
-            ref={(rect) => { this.sizeRect = rect; }}
-            width={this.props.naturalWidth}
-            height={this.props.naturalHeight}
-            fill="rgba(0, 0, 0, 0.01)"
-            fillOpacity="0.01"
-            stroke="none"
-          />
-          {type === 'image' && (
-            <Draggable onDrag={this.props.panByDrag} disabled={this.props.disabled}>
-              <SVGImage
-                className={this.props.panEnabled ? 'pan-active' : ''}
-                src={src}
-                width={this.props.naturalWidth}
-                height={this.props.naturalHeight}
-                modification={this.props.modification}
-              />
-            </Draggable>
-          )}
+          <g
+            ref={(element) => { if (element) this.transformationContainer = element; }}
+            transform={this.props.transform}
+          >
+            <rect
+              ref={(rect) => { this.sizeRect = rect; }}
+              width={this.props.naturalWidth}
+              height={this.props.naturalHeight}
+              fill="rgba(0, 0, 0, 0.01)"
+              fillOpacity="0.01"
+              stroke="none"
+            />
+            {type === 'image' && (
+              <Draggable onDrag={this.props.panByDrag} disabled={this.props.disabled}>
+                <SVGImage
+                  className={this.props.panEnabled ? 'pan-active' : ''}
+                  src={src}
+                  width={this.props.naturalWidth}
+                  height={this.props.naturalHeight}
+                  modification={this.props.modification}
+                />
+              </Draggable>
+            )}
 
-          {children}
+            {children}
 
-        </g>
-      </svg>
+          </g>
+        </svg>
+        {this.props.children}
+      </div>
     );
   }
 }
@@ -194,6 +197,7 @@ SVGRenderer.propTypes = {
   annotation: React.PropTypes.shape({
     task: React.PropTypes.string
   }),
+  children: React.PropTypes.node,
   classification: React.PropTypes.shape({
     annotations: React.PropTypes.array,
     loading: React.PropTypes.bool
