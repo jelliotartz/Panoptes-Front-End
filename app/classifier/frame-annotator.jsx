@@ -5,7 +5,9 @@ import seenThisSession from '../lib/seen-this-session';
 import getSubjectLocation from '../lib/get-subject-location';
 import WarningBanner from './warning-banner';
 import SVGImage from '../components/svg-image';
+
 import FeedbackViewer from './feedback/feedback-viewer';
+import TooltipLayer from './feedback/tooltip-layer';
 
 
 export default class FrameAnnotator extends React.Component {
@@ -140,6 +142,7 @@ export default class FrameAnnotator extends React.Component {
     }
 
     const svgStyle = {};
+    let screenCTM = null;
     if (type === 'image' && !this.props.loading) {
       // Images are rendered again within the SVG itself.
       // When cropped right next to the edge of the image,
@@ -155,6 +158,8 @@ export default class FrameAnnotator extends React.Component {
       if (this.props.panEnabled === true) {
         svgStyle.pointerEvents = 'all';
       }
+
+      screenCTM = this.getScreenCurrentTransformationMatrix();
     }
 
     const svgProps = {};
@@ -228,6 +233,9 @@ export default class FrameAnnotator extends React.Component {
 
           {!!AfterSubject && (
             <AfterSubject {...hookProps} />)}
+
+          <TooltipLayer screenCTM={screenCTM} />
+
         </div>
       </div>
     );
