@@ -17,14 +17,13 @@ const experimentalFeatures = [
   'persist annotations',
   'shortcut',
   'metadata based feedback',
-  'export classifications by workflow',
   'freehandLine',
   'freehandShape',
   'freehandSegmentLine',
   'freehandSegmentShape',
   'enable subject flags',
   'sim notification',
-  'slider',
+  'slider'
 ];
 
 class ExperimentalFeatures extends Component {
