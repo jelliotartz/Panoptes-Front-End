@@ -1,7 +1,6 @@
 import React from 'react';
 import ProjectCardList from '../projects/project-card-list';
 import OrganizationMetaData from './organization-metadata';
-import OrganizationAbout from './organization-about';
 
 const OrganizationPage = ({ organization }) => (
   <div className="secondary-page all-resources-page">
@@ -18,7 +17,12 @@ const OrganizationPage = ({ organization }) => (
     </section>
     <section className="organization-metadata-about-container">
       <OrganizationMetaData organization={organization} />
-      <OrganizationAbout className="organization-about" organization={organization} />
+      <div className="organization-about">
+        <h1>ABOUT {organization.display_name}</h1>
+        <div className="organization-about-text">
+          {organization.introduction}
+        </div>
+      </div>
     </section>
   </div>
 );
