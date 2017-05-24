@@ -3,7 +3,7 @@ import ProjectCardList from '../projects/project-card-list';
 import OrganizationMetaData from './organization-metadata';
 import OrganizationAbout from './organization-about';
 
-const OrganizationView = ({ organization }) => (
+const OrganizationPage = ({ organization }) => (
   <div className="secondary-page all-resources-page">
     <section className="hero projects-hero">
       <div className="hero-container">
@@ -23,11 +23,11 @@ const OrganizationView = ({ organization }) => (
   </div>
 );
 
-OrganizationView.defaultProps = {
+OrganizationPage.defaultProps = {
   organization: {}
 };
 
-OrganizationView.propTypes = {
+OrganizationPage.propTypes = {
   organization: React.PropTypes.shape({
     projects: React.PropTypes.arrayOf(React.PropTypes.object),
     description: React.PropTypes.string,
@@ -35,4 +35,4 @@ OrganizationView.propTypes = {
   }).isRequired
 };
 
-export default OrganizationView;
+export default OrganizationPage;

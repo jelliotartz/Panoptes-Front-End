@@ -100,7 +100,7 @@ module.exports =
     <Route path="organizations">
       <IndexRoute component={(require './pages/organizations/organizations-container').default} />
       <Route path=":organization_id" component={(require './pages/organizations/organization-container').default}>
-        <IndexRoute component={(require './pages/organizations/organization-view').default} />
+        <IndexRoute component={(require './pages/organizations/organization-page').default} />
       </Route>
     </Route>
 

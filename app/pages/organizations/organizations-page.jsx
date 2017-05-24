@@ -21,7 +21,7 @@ const OrganizationsPage = ({ organizations }) => (
       <p>there are {organizations.length} organizations</p>
       <section className="resources-container">
         <div style={{ paddingTop: '1em' }}>
-          <ProjectCardList organizations={organizations} />
+          <ProjectCardList projects={organizations} />
         </div>
       </section>
     </section>
