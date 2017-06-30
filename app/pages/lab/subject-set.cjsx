@@ -17,6 +17,7 @@ VALID_SUBJECT_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.gif', '.svg', '.mp3', '.m
 INVALID_FILENAME_CHARS = ['/', '\\', ':', ',']
 MAX_FILE_SIZE = 1000 * 1024
 
+
 announceSetChange = ->
   apiClient.type('subject_sets').emit 'add-or-remove'
 
@@ -353,6 +354,16 @@ EditSubjectSetPage = React.createClass
           page: 1
         announceSetChange()
 
+  # check to see if beta-review has been applied for
+    # if yes, does the project have 100 subjects?
+      # if yes, keep beta-review applied for
+      # if no, change beta review status to not applied for
+  checkBetaStatus: ->
+    if @props.project.beta_requested is true
+      # async issue: how to wait for db to update subjects_count?
+      if @props.project.subjects_count < 100
+        @props.project.beta_requested = false
+
   deleteSubjectSet: ->
     @setState deletionError: null
 
@@ -365,12 +376,14 @@ EditSubjectSetPage = React.createClass
         .then =>
           announceSetChange()
           @props.project.uncacheLink 'subject_sets'
+          @checkBetaStatus()
           @context.router.push "/lab/#{@props.project.id}"
         .catch (error) =>
           @setState deletionError: error
         .then =>
           if @isMounted()
             @setState deletionInProgress: false
+
 
 module.exports = React.createClass
   displayName: 'EditSubjectSetPageWrapper'

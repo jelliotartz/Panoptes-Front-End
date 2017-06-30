@@ -49,10 +49,20 @@ module.exports = React.createClass
       .catch((error) =>
         @setState {error}
       ).then((workflow) =>
+        @checkForSubjectSets workflow
         if not workflow.active and workflow.id is @props.project.configuration?.default_workflow
           @props.project.update({ 'configuration.default_workflow': null })
           @props.project.save()
       ).then(() => @forceUpdate()) # Dislike. Eventually we should refactor to not have to call this.forceUpdate()
+
+  # currently not working
+  checkForSubjectSets: (workflow) ->
+    workflow.get('subject_sets', {}).then (resp) =>
+      subj_sets = resp[0]
+      if subj_sets.set_member_subjects_count > 99
+        console.log('you have 100 or more subjects!!')
+      else
+        console.log('you do not have enough subjects to apply for beta_requested.')
 
   handleSetStatsCompletenessType: (workflow, e) ->
     workflow.update({ 'configuration.stats_completeness_type': e.target.value }).save()
