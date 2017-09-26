@@ -20,16 +20,25 @@ module.exports = React.createClass
     discussionValidationErrors: []
     loading: false
     boards: []
-  
+
   componentDidMount: ->
+    console.log('!!!!!!!!!firing component did mount!!!!!!!!!')
     @updateBoards @props.subject
-  
+
   componentWillReceiveProps: (newProps) ->
+    console.log('!!!!!!!!!firing component will receive props!!!!!!!!!')
     @updateBoards newProps.subject if newProps.subject isnt @props.subject
 
   updateBoards: (subject) ->
+    console.log('!!!!!!!!!!!!!!!!!update boards subject:!!!!!!!!!!!!!!!!!')
+    console.log(subject)
+
     subject?.get 'project'
       .then (project) =>
+
+        console.log('!!!!!!!!!!!!!!!project response: !!!!!!!!!!!!!!!!!')
+        console.log(project)
+
         talkClient.type 'boards'
           .get
             section: projectSection(project)
@@ -51,10 +60,23 @@ module.exports = React.createClass
     @setState loading: true
     form = ReactDOM.findDOMNode(@).querySelector('.talk-board-new-discussion')
     titleInput = form.querySelector('input[type="text"]')
+
+
     title = titleInput.value
 
+    console.log('!!!!!!!!!!!!!!!!!on submit discussion\'s subject:!!!!!!!!!!!!!!!!!')
+    console.log(subject)
+
     user_id = @props.user.id
+
+    console.log('!!!!!!!!!!!!!!!!!@board_id:!!!!!!!!!!!!!!!!!')
+    console.log(@board_id)
+
     board_id = @props.boardId ? +form.querySelector('label > input[type="radio"]:checked').value
+
+    console.log('!!!!!!!!!!!!!!!!!do you understand that i\'m trying to set @board_id? :!!!!!!!!!!!!!!!!!')
+    console.log(@board_id)
+
     body = commentText
     focus_id = subject?.id
     focus_type = 'Subject' if !!focus_id

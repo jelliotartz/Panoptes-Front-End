@@ -13,6 +13,10 @@ module.exports = React.createClass
   contextTypes:
     router: React.PropTypes.object.isRequired
 
+  componentDidMount: ->
+    console.log('!!!!!!!!firing CDM in comment form!!!!!!!!')
+    @getBoards()
+
   componentWillMount: ->
     Promise.all([@getBoards(), @getSubjectDefaultBoard()]).then =>
       @setState loading: false
@@ -55,26 +59,48 @@ module.exports = React.createClass
     <p>There are no discussion boards setup for this project yet. Check back soon!</p>
 
   quickComment: ->
+    console.log('hello from quick comment!!!!!!')
+    console.log('!!!!!!!!!!!!!!@state.subjectDefaultBoard!!!!!!!!!!!')
+    console.log(@state.subjectDefaultBoard)
     if @state.subjectDefaultBoard
       <QuickSubjectCommentForm {...@props} subject={@props.subject} user={@props.user} />
     else
-      <p>
-        There is no default board for subject comments setup yet, Please{' '}
-        <button className="link-style" onClick={=> @setState(tab: 1)}>start a new discussion</button>{' '}
-        or {@linkToClassifier('return to classifying')}
-      </p>
+      @notSetup() # there is no default board. therefore displaying the not setup message.
+      # <p>
+      #   There is no default board for subject comments setup yet, Please{' '}
+      #   <button className="link-style" onClick={=> @setState(tab: 1)}>start a new discussion</button>{' '}
+      #   or {@linkToClassifier('return to classifying')}
+      # </p>
 
   startDiscussion: ->
+    if @state.boards.length < 0
+      @getBoards()
+
     <NewDiscussionForm
       user={@props.user}
       project={@props.project}
       subject={@props.subject}
       onCreateDiscussion={@onCreateDiscussion} />
 
+    # console.log('hello from start discussion!!!!!!!!!!!!')
+    # console.log(@state.boards)
+
+    # if @state.boards not true
+    #   @getSubjectDefaultBoard
+
+
   renderTab: ->
-    switch @state.tab
-      when 0 then @quickComment()
-      when 1 then @startDiscussion()
+    console.log('hello from render tab!!!')
+    console.log(@state.boards.length)
+
+    if @state.boards.length > 0 # if @state.boards has any boards, render both quick comment and start discussion
+      switch @state.tab
+        when 0 then @quickComment()
+        when 1 then @startDiscussion()
+    else # if there are no additional boards set up, only render the quick comment tab
+      @quickComment()
+
+
 
   render: ->
     return <Loading /> if @state.loading
@@ -89,7 +115,7 @@ module.exports = React.createClass
               Add a note about this subject
             </div>
 
-            <div className="tabbed-content-tab #{if @state.tab is 1 then 'active' else ''}" onClick={=> @setState({tab: 1})}>
+            <div className="tabbed-content-tab #{if @state.tab is 1 then 'active' else ''} #{if @state.boards.length < 1 then 'test'}" onClick={=> @setState({tab: 1})}>
               Start a new discussion
             </div>
           </div>
