@@ -17,87 +17,81 @@ counterpart.registerTranslations('en', {
   }
 });
 
-class AdminPage extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+// class AdminPage extends React.Component {
+//   constructor(props) {
+//     super(props);
+//   }
 
-  render() {
-    return (
-      <section className="admin-page-content">
-        <Helmet title={counterpart('userAdminPage.header')} />
-        <div className="secondary-page admin-page">
-          <h2><Translate content="userAdminPage.header" /></h2>
-          <div className="admin-content">
-            <aside className="secondary-page-side-bar admin-side-bar">
-              <nav>
-                <IndexLink
-                  to="/admin"
-                  type="button"
-                  className="secret-button admin-button"
-                  activeClassName="active"
-                >
-                  <Translate content="userAdminPage.nav.createAdmin" />
-                </IndexLink>
-                <Link
-                  to="/admin/project_status"
-                  type="button"
-                  className="secret-button admin-button"
-                  activeClassName="active"
-                >
-                  <Translate content="userAdminPage.nav.projectStatus" />
-                </Link>
-                <Link
-                  to="/admin/grantbot"
-                  type="button"
-                  className="secret-button admin-button"
-                  activeClassName="active"
-                >
-                  <Translate content="userAdminPage.nav.grantbot" />
-                </Link>
-                <Link
-                  to="/admin/organization-status"
-                  type="button"
-                  className="secret-button admin-button"
-                  activeClassName="active"
-                >
-                  <Translate content="userAdminPage.nav.organizationStatus" />
-                </Link>
-              </nav>
-            </aside>
-            <section className="admin-tab-content">
-              {React.cloneElement(this.props.children, this.props)}
-            </section>
+//   render() {
+
+//   }
+// }
+
+const AdminPage = (props) => {
+// class AdminPage extends React.Component {
+// class AdminPageWrapper extends React.Component {
+
+  {props.user && props.user.admin &&
+    (<ChangeListener target={props.user}>
+        <section className="admin-page-content">
+          <Helmet title={counterpart('userAdminPage.header')} />
+          <div className="secondary-page admin-page">
+            <h2><Translate content="userAdminPage.header" /></h2>
+            <div className="admin-content">
+              <aside className="secondary-page-side-bar admin-side-bar">
+                <nav>
+                  <IndexLink
+                    to="/admin"
+                    type="button"
+                    className="secret-button admin-button"
+                    activeClassName="active"
+                  >
+                    <Translate content="userAdminPage.nav.createAdmin" />
+                  </IndexLink>
+                  <Link
+                    to="/admin/project_status"
+                    type="button"
+                    className="secret-button admin-button"
+                    activeClassName="active"
+                  >
+                    <Translate content="userAdminPage.nav.projectStatus" />
+                  </Link>
+                  <Link
+                    to="/admin/grantbot"
+                    type="button"
+                    className="secret-button admin-button"
+                    activeClassName="active"
+                  >
+                    <Translate content="userAdminPage.nav.grantbot" />
+                  </Link>
+                  <Link
+                    to="/admin/organization-status"
+                    type="button"
+                    className="secret-button admin-button"
+                    activeClassName="active"
+                  >
+                    <Translate content="userAdminPage.nav.organizationStatus" />
+                  </Link>
+                </nav>
+              </aside>
+              <section className="admin-tab-content">
+                {React.cloneElement(props.children, props)}
+              </section>
+            </div>
           </div>
-        </div>
-      </section>
-    )
-  }
-}
+        </section>
+    </ChangeListener>)}
 
-
-class AdminPageWrapper extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    {this.props.user && this.props.user.admin &&
-      (<ChangeListener target={this.props.user}>
-        {React.cloneElement(AdminPage, this.props)}
-      </ChangeListener>)}
-
-    {this.props.user &&
-      (<div className="content-container">
-        <p>You are not an administrator</p>
-      </div>)}
-
+  {props.user &&
     (<div className="content-container">
-        <p>You’re not signed in.</p>
-      </div>);
+      <p>You are not an administrator</p>
+    </div>)}
 
-  }
+  (<div className="content-container">
+      <p>You’re not signed in.</p>
+    </div>);
+
 }
 
-export default AdminPageWrapper;
+export default AdminPage;
 
