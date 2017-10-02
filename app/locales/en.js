@@ -75,5 +75,13 @@ export default {
     title: 'Zooniverse Security',
     intro: 'The Zooniverse takes very seriously the security of our websites and systems, and protecting our users and their personal information is our highest priority. We take every precaution to ensure that the information you give us stays secure, but it is also important that you take steps to secure your own account, including:\n\n* Do not use the same password on different websites. The password you use for your Zooniverse account should be unique to us.\n* Never give your password to anyone. We will never ask you to send us your password, and you should never enter your Zooniverse password into any website other than ours. Always check your browser\'s address bar to make sure you have a secure connection to _www.zooniverse.org_.\n\nFor general advice and information about staying safe online, please visit:\n\n* [Get Safe Online](https://www.getsafeonline.org)\n* [Stay Safe Online](https://www.staysafeonline.org)\n* [US-CERT - Tips](https://www.us-cert.gov/ncas/tips)',
     details: '## Reporting Security Issues\n\nThe Zooniverse supports [responsible disclosure](https://en.wikipedia.org/wiki/Responsible_disclosure) of vulnerabilities. If you believe you have discovered a security vulnerability in any Zooniverse software, we ask that this first be reported to [security@zooniverse.org](mailto:security@zooniverse.org) to allow time for vulnerabilities to be fixed before details are published.\n\n## Known Vulnerabilities and Incidents\n\nWe believe it is important to be completely transparent about security issues. A complete list of fixed vulnerabilities and past security incidents is given below:\n\n* _(No entries at this time)_\n\nNew vulnerabilities and incidents will be announced via the [Zooniverse blog in the "technical" category](http://blog.zooniverse.org/category/technical/).'
+  },
+  resetPassword: {
+    newPasswordFormDialog: 'Go ahead and enter a new password, then you can get back to doing some research.',
+    enterEmailDialog: 'Please enter your email address here and we’ll send you a link you can follow to reset it.',
+    emailSuccess: 'We’ve just sent you an email with a link to reset your password.',
+    emailError: 'There was an error reseting your password.',
+    resetError: 'Something went wrong, please try and reset your password via email again.',
+    loggedInDialog: 'You are currently logged in. Please log out if you would like to reset your password.'
   }
 };

@@ -29,6 +29,7 @@ React = require 'react'
 `import HomePageRoot from './pages/home';`
 `import PrivacyPolicy from './pages/privacy-policy';`
 `import SecurityPolicy from './pages/security-policy';`
+`import ResetPasswordPage from './pages/reset-password';`
 
 # <Redirect from="home" to="/" /> doesn't work.
 ONE_UP_REDIRECT = React.createClass
@@ -66,7 +67,7 @@ module.exports =
       <Redirect from="callForProjects" to="call-for-projects" />
     </Route>
 
-    <Route path="reset-password" component={require './pages/reset-password'} />
+    <Route path="reset-password" component={ResetPasswordPage} />
 
     <Route path="unsubscribe" component={UnsubscribeFromEmails} />
 
